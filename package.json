@@ -1,0 +1,30 @@
+{
+  "name": "blog",
+  "version": "0.0.1",
+  "description": "Blog listing app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PaulBoye-py/uni-helsinki-part4.git"
+  },
+  "author": "Paul Aderoju",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PaulBoye-py/uni-helsinki-part4/issues"
+  },
+  "homepage": "https://github.com/PaulBoye-py/uni-helsinki-part4#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
