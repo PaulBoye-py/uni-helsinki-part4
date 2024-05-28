@@ -1,4 +1,4 @@
-const { test, after, beforeEach } = require('node:test')
+const { test, after, beforeEach, describe } = require('node:test')
 const assert = require('node:assert')
 const mongoose = require('mongoose')
 const Blog = require('../models/blog')
@@ -117,6 +117,35 @@ test.only('missing blog title or url returns a 400 error', async () => {
         .send(noUrlBlog)
         .expect(400)
 
+})
+
+test.only('deletion of a blog only if id is valid', async () => {
+        const blogsAtStart = await blogsInDb()
+        const blogToDelete = blogsAtStart[0]
+
+        await api
+            .delete(`/api/blogs/${blogToDelete.id}`)
+            .expect(204)
+
+        const blogsAtEnd = await blogsInDb()
+        assert.strictEqual(blogsAtEnd.length, initialBlogs.length - 1)
+})
+
+test.only('updating a blog with a valid ID', async () => {
+    const blogsAtStart = await blogsInDb()
+    const blogToUpdate = blogsAtStart[0]
+
+    const blog = { ...blogToUpdate, likes: 7 }
+
+    await api
+        .put(`/api/blogs/${blogToUpdate.id}`)
+        .send(blog)
+        .expect(200)
+
+    const blogsAtEnd = await blogsInDb()
+    const updatedBlog = blogsAtEnd[0]
+
+    assert.strictEqual(updatedBlog.likes, 7)
 })
 
 after(async () => {
